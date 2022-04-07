@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 
-const db = [{ name: "tiina" }, { name: "jack" }];
+const db = [{ name: "tiina" }, { name: "jack1" }];
 
 app.get("/names", (req, res) => {
   res.send(db);
