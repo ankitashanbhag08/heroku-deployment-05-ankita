@@ -14,9 +14,26 @@ const App =()=> {
     
       getLocations();
   },[])
+
+  const saveLocation = async (location)=>{
+    try{
+      let lat=Number(location.lat)
+      let lng=Number(location.lng)
+      const resp = await axios.post('/locations',{latitude:lat,longitude:lng})
+      const newLocation={id:Number(resp.data), latitude:lat, longitude:lng}
+      setLocationData([...locationData, newLocation])
+      console.log(`Location inserted with Id ${newLocation.id}`)
+      
+    }catch(err){
+      console.log(err)
+    }
+    
+    
+
+  }
     return (
-      <MapContainer center={[65, 60]} zoom={2} scrollWheelZoom={false} whenCreated={(map)=>{
-        map.on("dblclick",(e)=>console.log(e.latlng.lat))
+      <MapContainer center={[51.505, -0.09]} zoom={2} scrollWheelZoom={false} whenCreated={(map)=>{
+        map.on("dblclick",(e)=>{saveLocation(e.latlng)})
       }}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

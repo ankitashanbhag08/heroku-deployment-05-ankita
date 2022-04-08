@@ -29,7 +29,15 @@ let connectionFunctions = {
         
     },
     
-    
+    save:(latitude, longitude)=>{
+        function innerAsync(resolve, reject){
+            const sql = "INSERT INTO locations (latitude, longitude) VALUES (?, ?)"
+            connection.query(sql, [latitude, longitude], (err, result)=>{
+                err ? reject(err) : resolve(result.insertId)
+            })
+        }
+        return new Promise(innerAsync);
+    },
     
     close: (callback)=>{
         connection.end(()=>{
