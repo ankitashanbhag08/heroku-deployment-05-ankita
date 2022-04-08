@@ -2,10 +2,12 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
-
+var cors = require('cors')
 const db = [{ name: "tiina" }, { name: "jack1" }];
 const database = require('./crudrepository')
 
+app.use(cors())
+app.use(express.static("frontend/build"));
 app.get("/names", (req, res) => {
   res.send(db);
 });
