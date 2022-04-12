@@ -21,7 +21,7 @@ const App =()=> {
       let lng=Number(location.lng)
       const resp = await axios.post('/locations',{latitude:lat,longitude:lng})
       const newLocation={id:Number(resp.data), latitude:lat, longitude:lng}
-      //setLocationData([...locationData, newLocation])
+      setLocationData((locationData)=>[...locationData, newLocation])
       console.log(`Location inserted with Id: ${newLocation.id}, Latitude:${lat}, Longitude: ${lng} `)
       
     }catch(err){
